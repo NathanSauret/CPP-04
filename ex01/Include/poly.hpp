@@ -8,6 +8,7 @@
 #include "cat.hpp"
 #include "wrong_animal.hpp"
 #include "wrong_cat.hpp"
+#include "brain.hpp"
 
 #define RESET       "\033[0m"
 #define BLACK       "\033[30m"
