@@ -58,6 +58,11 @@ std::string	Cat::getIdea( int const &index ) const
 	return (NULL);
 }
 
+Brain		&Cat::getBrain(void) const
+{
+	return (*this->_brain);
+}
+
 
 
 // Set

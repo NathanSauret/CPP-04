@@ -2,6 +2,7 @@
 #define ANIMAL_HPP
 
 #include <string>
+#include "brain.hpp"
 
 class Animal
 {
@@ -22,6 +23,7 @@ class Animal
 
 		// Get
 		std::string	getType( void ) const;
+		virtual Brain		&getBrain(void) const = 0;
 
 		// Set
 		void	setType( const std::string &type );

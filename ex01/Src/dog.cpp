@@ -58,6 +58,10 @@ std::string	Dog::getIdea( int const &index ) const
 	return (NULL);
 }
 
+Brain		&Dog::getBrain(void) const
+{
+	return (*this->_brain);
+}
 
 
 // Set

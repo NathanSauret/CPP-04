@@ -47,7 +47,6 @@ std::string	Animal::getType() const
 }
 
 
-
 // Set
 void	Animal::setType( const std::string &type )
 {

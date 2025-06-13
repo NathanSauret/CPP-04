@@ -26,6 +26,7 @@ class Dog : public Animal
 
 		// Get
 		std::string	getIdea( int const &index ) const;
+		Brain		&getBrain(void) const;
 
 		// Set
 		void	setIdea( std::string const &idea, int const &index );
