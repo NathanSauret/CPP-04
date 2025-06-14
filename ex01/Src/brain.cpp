@@ -26,11 +26,17 @@ Brain::~Brain()
 
 
 // Operators overload
-Brain	&Brain::operator=( const Brain &src )
+Brain &Brain::operator=( const Brain &src )
 {
-	std::cout << "\tBrain assignation operator called" << std::endl;
-	std::copy(src._ideas, src._ideas + 100, _ideas);
-	return (*this);
+	std::cout << "\tBrain Assignation operator called" << std::endl;
+	if (this == &src)
+		return *this;
+	for (int i = 0; i < 100; i++)
+	{
+		if (src._ideas[i].length() > 0)
+			this->_ideas[i].assign(src._ideas[i]);
+	}
+	return *this;
 }
 
 
@@ -39,7 +45,7 @@ Brain	&Brain::operator=( const Brain &src )
 std::string	Brain::getIdea( int const &index ) const
 {
 	if (index >= 0 && index < 100)
-		return (_ideas[index]);
+		return (this->_ideas[index]);
 	std::cout << RED << "\tThere is only 100 ideas per brain, please enter an index 0-99" << RED << std::endl;
 	return (NULL);
 }
@@ -47,9 +53,10 @@ std::string	Brain::getIdea( int const &index ) const
 
 
 // Set
-void	Brain::setIdea( std::string const &idea, int const &index )
+void	Brain::setIdea(size_t i, std::string idea)
 {
-	if (index >= 0 && index < 100)
-		this->_ideas[index] = idea;
-	std::cout << RED << "\tThere is only 100 ideas per brain, please enter an index 0-99" << RESET << std::endl;
+	if (i >= 0 && i < 100)
+		this->_ideas[i] = idea;
+	else
+		std::cout << RED << "\tThere is only 100 ideas per brain, please enter an index 0-99" << RESET << std::endl;
 }

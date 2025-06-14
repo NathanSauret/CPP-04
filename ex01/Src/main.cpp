@@ -18,8 +18,8 @@ void	sub_title(const std::string str)
 {
 	std::string	title;
 
-	if (str.length() + 8 + 3 + 2 >= 42)
-		return ;
+	// if (str.length() + 8 + 3 + 2 >= 42)
+	// 	return ;
 
 	title.append("        ~~~ " + str + " ");
 	while (title.length() < 42)
@@ -28,71 +28,99 @@ void	sub_title(const std::string str)
 	std::cout << CYAN << title << RESET << std::endl;
 }
 
-#define N_ANIMALS 10
-
-int	main(void)
+void	main_testing()
 {
-	{
-		const Animal *lotsOfAnimals[N_ANIMALS];
+	sub_title("Constructors of Animal[10]");
+	const Animal	*animals[10];
 
-		for (int i = 0; i < N_ANIMALS; i++)
+	for (int i = 0; i < 10; i++)
+	{
+		if (i % 2)
 		{
-			if (i < N_ANIMALS / 2)
-				lotsOfAnimals[i] = new Dog();
-			else
-				lotsOfAnimals[i] = new Cat();
+			std::cout << BOLDMAGENTA << "\tcat:" << RESET << std::endl;
+			animals[i] = new Cat();
 		}
-		std::cout << "-------------------------------------\n";
-		std::cout << lotsOfAnimals[0]->getType() << std::endl;
-		std::cout << lotsOfAnimals[5]->getType() << std::endl;
-		Brain *brain;
-		brain = &lotsOfAnimals[0]->getBrain();
-		brain->setIdea("I want sarshisitas!", 0);
-		brain->setIdea("Let's play ball!!", 1);
-		brain->setIdea("Feed me human!", 2);
-		std::cout << lotsOfAnimals[0]->getBrain().getIdea(0) << std::endl;
-		std::cout << lotsOfAnimals[0]->getBrain().getIdea(1) << std::endl;
-		std::cout << "-------------------------------------\n";
-		for (int i = 0; i < N_ANIMALS; i++)
-			delete lotsOfAnimals[i];
+		else
+		{
+			std::cout << BOLDMAGENTA << "\tdog:" << RESET << std::endl;
+			animals[i] = new Dog();
+		}
 	}
-	std::cout << "-------------------------------------\n";
-	{
-		std::cout << "Check deep copy of Dog class using copy constructor:\n" << std::endl;
-		Dog *dogA = new Dog;
-		Dog *dogB = new Dog(*dogA);
+	std::cout << std::endl;
 
-		delete dogA;
-		delete dogB;
-	}
-	std::cout << "-------------------------------------\n";
+	sub_title("Testing");
+	for (int i = 0; i < 10; i++)
 	{
-		std::cout << "Check deep copy of Dog class using assignment operator overload:\n" << std::endl;
-		Dog *dogA = new Dog;
-		Dog *dogB = new Dog;
-
-		*dogA = *dogB;
-		delete dogA;
-		delete dogB;
+		std::cout << BOLDMAGENTA << "\t" << animals[i]->getType() << ":" << RESET << std::endl;
+		animals[i]->makeSound();
 	}
-	std::cout << "-------------------------------------\n";
+	std::cout << std::endl;
+
+	sub_title("Destructors");
+	for (int i = 0; i < 10; i++)
 	{
-		std::cout << "Check deep copy of Cat class using copy constructor:\n" << std::endl;
-		Cat *catA = new Cat;
-		Cat *catB = new Cat(*catA);
-
-		delete catA;
-		delete catB;
+		if (i % 2)
+			std::cout << BOLDMAGENTA << "\tcat:" << RESET << std::endl;
+		else
+			std::cout << BOLDMAGENTA << "\tdog:" << RESET << std::endl;
+		delete(animals[i]);
 	}
-	std::cout << "-------------------------------------\n";
-	{
-		std::cout << "Check deep copy of Cat class using assignment operator overload:\n" << std::endl;
-		Cat *catA = new Cat;
-		Cat *catB = new Cat;
+	std::cout << std::endl;
+}
 
-		*catA = *catB;
-		delete catA;
-		delete catB;
-	}
+void	main_deep_copy()
+{
+	sub_title("Constructor Dog sif");
+	Dog *sif = new Dog();
+	std::cout << std::endl;
+
+
+	sub_title("Set ideas");
+	std::cout << "\tSet idea 'Artorias' to index 0:" << std::endl;
+	sif->setIdea(0, "Artorias");
+	std::cout << std::endl;
+
+	std::cout << "\tSet idea 'protect the grave' to index 1:" << std::endl;
+	sif->setIdea(1, "protect the grave");
+	std::cout << std::endl;
+
+	std::cout << "\tSet idea 'big sword' to index 42:" << std::endl;
+	sif->setIdea(42, "big sword");
+	std::cout << std::endl;
+
+	std::cout << "\tSet idea 'Abyss' to index 101:" << std::endl;
+	sif->setIdea(101, "Abyss");
+	std::cout << std::endl;
+
+
+	sub_title("Constructor Dog poochi, copy of Dog sif");
+	Dog *poochy = new Dog(*sif);
+	std::cout << std::endl;
+
+	sub_title("Testing if brain copy work");
+	std::cout << "\tThe " << sif->getType() << " sif has the following ideas: " << std::endl;
+	sif->getIdeas();
+	std::cout << std::endl;
+
+	std::cout << "\tThe " << poochy->getType() << " poochy has the following ideas: " << std::endl;
+	poochy->getIdeas();
+	std::cout << std::endl;
+
+	sub_title("Destructors");
+	std::cout << BOLDMAGENTA << "\tDog sif:" << RESET << std::endl;
+	delete(sif);
+	std::cout << BOLDMAGENTA << "\tDog poochy:" << RESET << std::endl;
+	delete(poochy);
+	std::cout << std::endl;
+}
+
+int	main()
+{
+	title("ARRAY OF ANIMALS");
+	main_testing();
+
+	title("DEEP COPY");
+	main_deep_copy();
+
 	return (0);
 }

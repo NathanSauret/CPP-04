@@ -2,7 +2,10 @@
 #define ANIMAL_HPP
 
 #include <string>
+#include <cstdio>
+#include <cstdlib>
 #include "brain.hpp"
+
 
 class Animal
 {

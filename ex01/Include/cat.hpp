@@ -26,10 +26,11 @@ class Cat : public Animal
 
 		// Get
 		std::string	getIdea( int const &index ) const;
+		void		getIdeas( void ) const;
 		Brain		&getBrain(void) const;
 
 		// Set
-		void	setIdea( std::string const &idea, int const &index );
+		void	setIdea(size_t i, std::string idea);
 };
 
 #endif

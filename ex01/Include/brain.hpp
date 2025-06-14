@@ -23,7 +23,7 @@ class Brain
 		std::string	getIdea( int const &index ) const;
 
 		// Set
-		void	setIdea( std::string const &idea, int const &index );
+		void	setIdea(size_t i, std::string idea);
 };
 
 #endif
