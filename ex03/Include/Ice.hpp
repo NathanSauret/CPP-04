@@ -9,18 +9,18 @@ class Ice : public AMateria
 
 	public:
 		// Constructors
-		Ice();
-		Ice( const Ice &src );
+		Ice(void);
+		Ice(Ice const &copy);
 
-		// Destructor
-		virtual	~Ice();
+		// Destructors
+		~Ice(void);
 
 		// Operators overload
-		Ice &operator=( const Ice &src );
+		Ice const	&operator=(Ice const &copy);
 
 		// Class member functions
-		virtual AMateria	*clone() const;
-		void				use( ICharacter &target );
+		virtual AMateria	*clone(void) const;
+		void				use(ICharacter &target);
 };
 
 #endif

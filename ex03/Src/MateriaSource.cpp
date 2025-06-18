@@ -3,7 +3,7 @@
 
 
 // Constructors
-MateriaSource::MateriaSource()
+MateriaSource::MateriaSource() : _memory()
 {
 	std::cout << "\tMateriaSource default constructor called" << std::endl;
 }

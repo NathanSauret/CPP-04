@@ -5,6 +5,8 @@
 
 class Cure : public AMateria
 {
+	private:
+
 	public:
 		// Constructors
 		Cure(void);

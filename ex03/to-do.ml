@@ -2,6 +2,6 @@
 [X] - Ice
 [X] - Cure
 [X] - MateriaSource
-[] - Character
+[X] - Character
 
-Aide: https://github.com/lschrafstetter/42_cpp04/blob/master/ex03/Character.cpp
+Aide: https://github.com/madebypixel02/CPP-Module-04/tree/main

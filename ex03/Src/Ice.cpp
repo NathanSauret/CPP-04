@@ -24,9 +24,8 @@ Ice::~Ice()
 
 
 // Operators overload
-Ice	&Ice::operator=( const Ice &src )
+Ice const	&Ice::operator=(const Ice &src)
 {
-	std::cout << "\tAssigning operator called" << std::endl;
 	this->_type = src._type;
 	return (*this);
 }
