@@ -85,14 +85,14 @@ void	Character::equip( AMateria *materia )
 				this->_inventory[i] = materia->clone();
 			else
 				this->_inventory[i] = materia;
-			std::cout << "\tMateria " << this->_inventory[i]->getType() << " equipped to " << this->_name << "'s inventory at index " << i << std::endl;
+			std::cout << "\tCharacter " << this->_name << " equip Materia " << this->_inventory[i]->getType() << " at index " << i << std::endl;
 			return ;
 		}
 	}
 	if (materia)
-		std::cout << "\tCan't equip materia, inventory full" << std::endl;
+		std::cout << "\tCharacter " << this->_name << " can't equip materia, inventory full" << std::endl;
 	else
-		std::cout << "\tCan't equip materia, invalid" << std::endl;
+		std::cout << "\tCharacter " << this->_name << " Can't equip materia, invalid" << std::endl;
 	if (!this->isInInventory(materia))
 		delete materia;
 }
@@ -101,13 +101,13 @@ void	Character::unequip( int i )
 {
 	if (i >= 0 && i < 4 && this->_inventory[i])
 	{
-		std::cout << "\tMateria " << this->_inventory[i]->getType() << " unequiped from " << this->_name << "'s inventory at index " << i << std::endl;
+		std::cout << "\tCharacter" << this->_name << " equip Materia " << this->_inventory[i]->getType() << " at index " << i << std::endl;
 		this->_inventory[i] = NULL;
 	}
 	else if (i < 0 || i >= 4)
-		std::cout << "\tCan't unequip materia, index must be 0-3" << std::endl;
+		std::cout << "\tCharacter " << this->_name << " Can't unequip materia, index must be 0-3" << std::endl;
 	else
-		std::cout << "\tCan't unequip materia, is empty" << std::endl;
+		std::cout << "\tCharacter " << this->_name << " Can't unequip materia, is empty" << std::endl;
 }
 
 void	Character::use(int i, ICharacter &target)
@@ -115,7 +115,7 @@ void	Character::use(int i, ICharacter &target)
 	if (i >= 0 && i < 4 && this->_inventory[i])
 		this->_inventory[i]->use(target);
 	else if (i < 0 || i >= 4)
-		std::cout << "\tCan't use materia, index must be 0-3" << std::endl;
+		std::cout << "\tCharacter " << this->_name << " Can't use materia, index must be 0-3" << std::endl;
 	else
-		std::cout << "\tCa't use materia, is empty!" << std::endl;
+		std::cout << "\tCharacter " << this->_name << " Can't use materia, is empty!" << std::endl;
 }
