@@ -1,44 +1,37 @@
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include <string>
-#include "Icharacter.hpp"
+#include "ICharacter.hpp"
 
-class Character : public ICharacter
+class Character: public ICharacter
 {
 	private:
 		std::string	_name;
 		AMateria	*_inventory[4];
-		static int	_n_characters;
-		
+
 	public:
 		// Constructors
-		Character();
-		Character( std::string name );
-		Character( const Character &src );
+		Character(void);
+		Character(std::string const &name);
+		Character(Character const &copy);
 
 		// Destructor
-		~Character();
+		~Character(void);
 
 		// Operators overload
-		Character &operator=( const Character &src );
-		void swap( Character &first, Character &second );
+		Character const	&operator=(Character const &copy);
 
 		// Get
-		std::string const	&getName() const;
-		AMateria			*getInventory( int i ) const;
+		std::string const	&getName(void) const;
 
 		// Set
-		void	setName( const std::string &name );
-		void	setInventory( int i, AMateria *materia );
+		void	setName(std::string const &name);
 
 		// Class member functions
-		virtual void	equip( AMateria *materia );
-		virtual void	equip_from_floor( int i );
-		virtual void	unequip( int i );
-		virtual void	use( int i, ICharacter &target );
-
-		static AMateria	*_floor[50];
+		virtual void	equip(AMateria *m);
+		virtual void	unequip(int idx);
+		virtual void	use(int idx, ICharacter &target);
+		int 			isInInventory(AMateria *m);
 };
 
 #endif

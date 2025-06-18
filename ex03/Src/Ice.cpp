@@ -3,16 +3,14 @@
 
 
 // Constructors
-Ice::Ice()
+Ice::Ice(void) : AMateria("ice")
 {
 	std::cout << "\tIce default constructor called" << std::endl;
-	this->_type = "ice";
 }
 
-Ice::Ice( const Ice &src )
+Ice::Ice(Ice const &copy): AMateria(copy)
 {
 	std::cout << "\tIce copy constructor called" << std::endl;
-	this->_type = "ice";
 }
 
 
@@ -30,6 +28,7 @@ Ice	&Ice::operator=( const Ice &src )
 {
 	std::cout << "\tAssigning operator called" << std::endl;
 	this->_type = src._type;
+	return (*this);
 }
 
 
@@ -37,13 +36,10 @@ Ice	&Ice::operator=( const Ice &src )
 // Class member functions
 AMateria *Ice::clone() const
 {
-	AMateria *temp = new Ice(*this);
-	temp->setWielder(NULL);
-	temp->setMateriaSource(NULL);
-	return (temp);
+	return (new Ice(*this));
 }
 
-void	use( ICharacter &target )
+void	Ice::use( ICharacter &target )
 {
 	std::cout << "\t* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }

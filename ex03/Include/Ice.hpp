@@ -1,8 +1,7 @@
 #ifndef ICE_HPP
 #define ICE_HPP
 
-#include "AMateria.hpp"
-#include "Icharacter.hpp"
+#include "ICharacter.hpp"
 
 class Ice : public AMateria
 {
@@ -21,7 +20,7 @@ class Ice : public AMateria
 
 		// Class member functions
 		virtual AMateria	*clone() const;
-		virtual void		use( ICharacter &target );
+		void				use( ICharacter &target );
 };
 
 #endif

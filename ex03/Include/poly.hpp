@@ -2,12 +2,13 @@
 #define POLY_HPP
 
 #include <iostream>
-#include <string>
 #include "AMateria.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
 #include "MateriaSource.hpp"
+#include "IMateriaSource.hpp"
 #include "Character.hpp"
+#include "ICharacter.hpp"
 
 #define RESET       "\033[0m"
 #define BLACK       "\033[30m"

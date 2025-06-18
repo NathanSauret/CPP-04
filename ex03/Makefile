@@ -5,7 +5,11 @@ CFLAGS	= -Wall -Werror -Wextra -g3 -std=c++98 #-fsanitize=address,undefined
 SRC =	Src/main.cpp	\
 		Src/AMateria.cpp	\
 		Src/Ice.cpp	\
-		Src/Cure.cpp
+		Src/Cure.cpp	\
+		Src/Character.cpp	\
+		Src/MateriaSource.cpp	\
+		Src/ICharacter.cpp	\
+		Src/IMateriaSource.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

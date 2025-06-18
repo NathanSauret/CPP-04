@@ -3,16 +3,14 @@
 
 
 // Constructors
-Cure::Cure()
+Cure::Cure() : AMateria("cure")
 {
 	std::cout << "\tCure default constructor called" << std::endl;
-	this->_type = "Cure";
 }
 
-Cure::Cure( const Cure &src )
+Cure::Cure(Cure const &src): AMateria(src)
 {
 	std::cout << "\tCure copy constructor called" << std::endl;
-	this->_type = "Cure";
 }
 
 
@@ -26,10 +24,10 @@ Cure::~Cure()
 
 
 // Operators overload
-Cure	&Cure::operator=( const Cure &src )
+Cure const	&Cure::operator=(const Cure &src)
 {
-	std::cout << "\tAssigning operator called" << std::endl;
 	this->_type = src._type;
+	return (*this);
 }
 
 
@@ -37,13 +35,10 @@ Cure	&Cure::operator=( const Cure &src )
 // Class member functions
 AMateria *Cure::clone() const
 {
-	AMateria *temp = new Cure(*this);
-	temp->setWielder(NULL);
-	temp->setMateriaSource(NULL);
-	return (temp);
+	return (new Cure(*this));
 }
 
-void	use( ICharacter &target )
+void	Cure::use( ICharacter &target )
 {
 	std::cout << "\t* heals "<< target.getName() << "'s wounds *" << std::endl;
 }

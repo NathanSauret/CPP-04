@@ -6,25 +6,16 @@
 MateriaSource::MateriaSource()
 {
 	std::cout << "\tMateriaSource default constructor called" << std::endl;
-	for (int i = 0; i < 4; i++)
-		this->_memory[i] = NULL;
 }
 
-MateriaSource::MateriaSource( const MateriaSource &src )
+MateriaSource::MateriaSource( const MateriaSource &src ) :  IMateriaSource(src), _memory()
 {
-	std::cout << "\tMateriaSource copy constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
-		if ( src._memory[i] )
-		{
-			this->_memory[i] = src._memory[i]->clone();
-			this->_memory[i]->setMateriaSource(this);
-		}
-		else
-		{
-			this->_memory[i] = NULL;
-		}
+		if (src._memory[i])
+			this->_memory[i] = src._memory[i];
 	}
+	std::cout << "\tMateriaSource copy constructor called" << std::endl;
 }
 
 
@@ -37,68 +28,61 @@ MateriaSource::~MateriaSource()
 		if (this->_memory[i])
 			delete this->_memory[i];
 	}
+	std::cout << "\tMateriaSource destructor called" << std::endl;
 }
 
 
 
 // Operators overload
-MateriaSource	&MateriaSource::operator=( MateriaSource src )
+MateriaSource const	&MateriaSource::operator=(const MateriaSource &src)
 {
-	MateriaSource::swap(*this, src);
+	(void)src;
 	return (*this);
-}
-
-void MateriaSource::swap(MateriaSource &first, MateriaSource &second)
-{
-	std::swap(first._memory, second._memory);
-}
-
-
-
-// Get
-AMateria	*MateriaSource::getMemory( int i ) const
-{
-	if (i >= 0 && i < 3)
-		return (this->_memory[i]);
-	return (NULL);
-}
-
-
-
-// Set
-void	MateriaSource::setMemory( int i, AMateria *materia )
-{
-	if (i >= 0 && i < 3)
-		this->_memory[i] = materia;
 }
 
 
 
 // Class member function
-void	MateriaSource::learnMateria( AMateria *materia ) {
+void	MateriaSource::learnMateria( AMateria *materia )
+{
 	for (int i = 0; i < 4; i++)
 	{
-		if (this->_memory[i] == NULL)
+		if (materia && this->_memory[i] == NULL)
 		{
-			this->_memory[i] = materia;
-			materia->setMateriaSource(this);
-			std::cout << "\tMateria source learned " << materia->getType() << "!" << std::endl;
+			if (this->inLearnInventory(materia))
+				this->_memory[i] = materia;
+			else
+				this->_memory[i] = materia;
+			std::cout << "\tMateria " << this->_memory[i]->getType() << " learned at index " << i << std::endl;
 			return ;
 		}
 	}
-	std::cout << "\tCan't learn " << materia->getType() << ", materia source is full." << std::endl;
+	if (materia)
+		std::cout << "\tCan't learn materia, is full" << std::endl;
+	else
+		std::cout << "\tCan't learn materia, invalid" << std::endl;
+	if (!this->inLearnInventory(materia))
+		delete materia;
 }
 
 
-AMateria	*MateriaSource::createMateria( std::string const &type ) {
-	for (int i = 3; i >= 0; i--)
+AMateria	*MateriaSource::createMateria( std::string const &type )
+{
+	for (int i = 0; i < 4; i++)
 	{
 		if (this->_memory[i] && this->_memory[i]->getType() == type)
-		{
-			std::cout << "\tMateria source creates " << type << std::endl;
 			return (this->_memory[i]->clone());
-		}
 	}
-	std::cout << "\tMateria source can't create " << type << std::endl;
-	return (NULL);
+	std::cout << "\tCan't create materia, is invalid" << std::endl;
+	return (0);
+}
+
+int	MateriaSource::inLearnInventory(AMateria *materia)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->_memory[i] == materia)
+			return (1);
+	}
+	return (0);
 }

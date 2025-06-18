@@ -1,27 +1,24 @@
 #ifndef CURE_HPP
 #define CURE_HPP
 
-#include "AMateria.hpp"
-#include "Icharacter.hpp"
+#include "ICharacter.hpp"
 
 class Cure : public AMateria
 {
-	private:
-
 	public:
 		// Constructors
-		Cure();
-		Cure( const Cure &copy );
+		Cure(void);
+		Cure(Cure const &copy);
 
 		// Destructor
-		virtual ~Cure();
+		~Cure(void);
 
 		// Operators overload
-		Cure &operator=( const Cure &src );
+		Cure const	&operator=(Cure const &copy);
 
 		// Class member functions
-		virtual AMateria	*clone() const;
-		virtual void		use( ICharacter &target );
+		virtual AMateria	*clone(void) const;
+		void				use(ICharacter &target);
 };
 
 #endif

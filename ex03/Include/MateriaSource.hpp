@@ -8,28 +8,22 @@ class MateriaSource : public IMateriaSource
 {
 	private:
 		AMateria	*_memory[4];
-	
+
 	public:
 		// Constructors
-		MateriaSource();
-		MateriaSource( const MateriaSource &src );
+		MateriaSource(void);
+		MateriaSource(MateriaSource const &copy);
 
 		// Destructor
-		virtual ~MateriaSource();
+		~MateriaSource(void);
 
-		// Operators oveload
-		MateriaSource	&operator=( MateriaSource src );
-		void			swap( MateriaSource &first, MateriaSource &second );
+		// Operators overload
+		MateriaSource const	&operator=(MateriaSource const &copy);
 
-		// Get
-		AMateria	*getMemory( int i ) const;
-
-		// Set
-		void	setMemory( int i, AMateria *materia );
-
-		// Functions
-		virtual void		learnMateria( AMateria *materia );
-		virtual AMateria	*createMateria( std::string const& type );
+		// Class member functions
+		virtual void		learnMateria(AMateria *materia);
+		virtual AMateria*	createMateria(std::string const &type);
+		int 				inLearnInventory(AMateria *materia);
 };
 
 #endif

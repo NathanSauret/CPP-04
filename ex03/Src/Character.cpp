@@ -2,45 +2,26 @@
 
 
 
-int			Character::_n_characters = 0;
-AMateria	*Character::_floor[50] = {NULL};
-
-
-
 // Constructors
-Character::Character()
+Character::Character(void): _name("no_name"), _inventory()
 {
 	std::cout << "\tCharacter default constructor called" << std::endl;
-	this->_n_characters++;
-	this->_name = "no_name";
-	for (int i = 0; i < 4; i++)
-		_inventory[i] = NULL;
 }
 
-Character::Character( std::string name ) {
-	std::cout << "\tCharacter constructor with name " << name << " called" << std::endl;
-	_n_characters++;
-	this->_name = name;
-	for (int i = 0; i < 4; i++)
-		_inventory[i] = NULL;
-}
-
-Character::Character( const Character &src )
+Character::Character(std::string const &name): _name(name), _inventory()
 {
-	std::cout << "\tCharacter copy construtor called" << std::endl;
-	_n_characters++;
+	std::cout << "\tCharacter constructor with name " << name << " called" << std::endl;
+}
+
+Character::Character(Character const &src): ICharacter(src), _inventory()
+{
 	this->_name = src._name;
 	for (int i = 0; i < 4; i++)
 	{
 		if (src._inventory[i])
-		{
-			this->_inventory[i] = src._inventory[i]->clone();
-			this->_inventory[i]->setWielder(this);
-		}
-		else {	
-			this->_inventory[i] = NULL;
-		}
+			this->_inventory[i] = src._inventory[i];
 	}
+	std::cout << "Character copy constructor called" << std::endl;
 }
 
 
@@ -48,42 +29,21 @@ Character::Character( const Character &src )
 // Destructor
 Character::~Character()
 {
-	std::cout << "\tCharacter destructor called" << std::endl;
-	_n_characters--;
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->_inventory[i])
 			delete this->_inventory[i];
 	}
-	if (_n_characters == 0)
-	{
-		std::cout << "\tNo characters" << std::endl;
-		for (int i = 0; i < 50; i++)
-		{
-			if (_floor[i])
-			{
-				delete _floor[i];
-				_floor[i] = NULL;
-			}
-		}
-	}
+	std::cout << "\tCharacter destructor called" << std::endl;
 }
 
 
 
 // Operators overload
-Character	&Character::operator=( const Character &src )
+Character const	&Character::operator=(const Character &src)
 {
-	std::cout << "Character copy assignment operator called" << std::endl;
-	Character tmp = Character(src);
-	Character::swap(*this, tmp);
+	this->_name = src._name;
 	return (*this);
-}
-
-void	Character::swap( Character &first, Character &second )
-{
-	std::swap(first._name, second._name);
-	std::swap(first._inventory, second._inventory);
 }
 
 
@@ -94,13 +54,6 @@ std::string const	&Character::getName() const
 	return (this->_name);
 }
 
-AMateria	*Character::getInventory( int i ) const
-{
-	if ( i >= 0 && i < 3)
-		return (this->_inventory[i]);
-	return (NULL);
-}
-
 
 
 // Set
@@ -109,16 +62,60 @@ void	Character::setName( const std::string &name )
 	this->_name = name;
 }
 
-void	Character::setInventory( int i, AMateria *materia )
-{
-	if ( i >= 0 && i < 3)
-		this->_inventory[i] = materia;
-}
-
 
 
 // Class member functions
-void	equip( AMateria *materia )
+int Character::isInInventory(AMateria *materia)
 {
-	
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->_inventory[i] == materia)
+			return (1);
+	}
+	return (0);
+}
+
+void	Character::equip( AMateria *materia )
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (materia && this->_inventory[i] == NULL)
+		{
+			if (this->isInInventory(materia))
+				this->_inventory[i] = materia->clone();
+			else
+				this->_inventory[i] = materia;
+			std::cout << "\tMateria " << this->_inventory[i]->getType() << " equipped to " << this->_name << "'s inventory at index " << i << std::endl;
+			return ;
+		}
+	}
+	if (materia)
+		std::cout << "\tCan't equip materia, inventory full" << std::endl;
+	else
+		std::cout << "\tCan't equip materia, invalid" << std::endl;
+	if (!this->isInInventory(materia))
+		delete materia;
+}
+
+void	Character::unequip( int i )
+{
+	if (i >= 0 && i < 4 && this->_inventory[i])
+	{
+		std::cout << "\tMateria " << this->_inventory[i]->getType() << " unequiped from " << this->_name << "'s inventory at index " << i << std::endl;
+		this->_inventory[i] = NULL;
+	}
+	else if (i < 0 || i >= 4)
+		std::cout << "\tCan't unequip materia, index must be 0-3" << std::endl;
+	else
+		std::cout << "\tCan't unequip materia, is empty" << std::endl;
+}
+
+void	Character::use(int i, ICharacter &target)
+{
+	if (i >= 0 && i < 4 && this->_inventory[i])
+		this->_inventory[i]->use(target);
+	else if (i < 0 || i >= 4)
+		std::cout << "\tCan't use materia, index must be 0-3" << std::endl;
+	else
+		std::cout << "\tCa't use materia, is empty!" << std::endl;
 }
