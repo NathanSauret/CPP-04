@@ -21,7 +21,7 @@ Character::Character(Character const &src): ICharacter(src), _inventory()
 		if (src._inventory[i])
 			this->_inventory[i] = src._inventory[i];
 	}
-	std::cout << "Character copy constructor called" << std::endl;
+	std::cout << "\tCharacter copy constructor called" << std::endl;
 }
 
 

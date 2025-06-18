@@ -1,0 +1,125 @@
+[33m 0. CREATE SRC ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+	IMateriaSource default constructor called
+	MateriaSource default constructor called
+	AMateria constructor with type ice called
+	Ice default constructor called
+	Materia ice learned at index 0
+	AMateria constructor with type cure called
+	Cure default constructor called
+	Materia cure learned at index 1
+	ICharacter object created with default constructor
+	Character constructor with name me called
+	AMateria copy constructor called
+	AMateria assignment Operator Called
+	Ice copy constructor called
+	Materia ice equipped to me's inventory at index 0
+	AMateria copy constructor called
+	AMateria assignment Operator Called
+	Cure copy constructor called
+	Materia cure equipped to me's inventory at index 1
+	ICharacter object created with default constructor
+	Character constructor with name bob called
+	* shoots an ice bolt at bob *
+	* heals bob's wounds *
+
+	Character destructor called
+	Ice destructor called
+	AMateria destructor called
+	Cure destructor called
+	AMateria destructor called
+	Character destructor called
+	Ice destructor called
+	AMateria destructor called
+	Cure destructor called
+	AMateria destructor called
+	MateriaSource destructor called
+[33m 1. LEARN MATERIALS ~~~~~~~~~~~~~~~~~~~~~~[0m
+	IMateriaSource default constructor called
+	MateriaSource default constructor called
+	AMateria constructor with type ice called
+	Ice default constructor called
+	Materia ice learned at index 0
+	AMateria constructor with type cure called
+	Cure default constructor called
+	Materia cure learned at index 1
+	AMateria constructor with type ice called
+	Ice default constructor called
+	Materia ice learned at index 2
+	AMateria constructor with type cure called
+	Cure default constructor called
+	Materia cure learned at index 3
+	AMateria constructor with type cure called
+	Cure default constructor called
+	Can't learn materia, is full
+	Cure destructor called
+	AMateria destructor called
+
+[33m 2. DEEP COPY ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+	ICharacter object created with default constructor
+	Character constructor with name Alice called
+	ICharacter Assignment Operator Called
+	ICharacter object copied
+Character copy constructor called
+	Character destructor called
+	Character destructor called
+
+[33m 3. EQUIP MATERIALS ~~~~~~~~~~~~~~~~~~~~~~[0m
+	ICharacter object created with default constructor
+	Character constructor with name Alice called
+	AMateria copy constructor called
+	AMateria assignment Operator Called
+	Ice copy constructor called
+	Materia ice equipped to Alice's inventory at index 0
+	AMateria copy constructor called
+	AMateria assignment Operator Called
+	Cure copy constructor called
+	Materia cure equipped to Alice's inventory at index 1
+	Can't create materia, is invalid
+	Can't equip materia, invalid
+
+	Ice destructor called
+	AMateria destructor called
+	Cure destructor called
+	AMateria destructor called
+	Ice destructor called
+	AMateria destructor called
+	Cure destructor called
+	AMateria destructor called
+	MateriaSource destructor called
+[33m 4. MAX EQUIP ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+	AMateria constructor with type cure called
+	Cure default constructor called
+	AMateria constructor with type ice called
+	Ice default constructor called
+	Materia cure equipped to Alice's inventory at index 2
+	AMateria copy constructor called
+	AMateria assignment Operator Called
+	Cure copy constructor called
+	Materia cure equipped to Alice's inventory at index 3
+	Can't equip materia, inventory full
+	Ice destructor called
+	AMateria destructor called
+	Materia cure unequiped from Alice's inventory at index 2
+	Cure destructor called
+	AMateria destructor called
+	Can't unequip materia, is empty
+	Can't unequip materia, index must be 0-3
+
+[33m 5. MATERIALS ON NEW CHARACTER ~~~~~~~~~~~[0m
+	ICharacter object created with default constructor
+	Character constructor with name Bob called
+	* shoots an ice bolt at Bob *
+	* heals Bob's wounds *
+	Ca't use materia, is empty!
+	Can't use materia, index must be 0-3
+	Can't use materia, index must be 0-3
+	* heals Bob's wounds *
+	Character destructor called
+
+	Ice destructor called
+	AMateria destructor called
+	Cure destructor called
+	AMateria destructor called
+	Cure destructor called
+	AMateria destructor called
+	Character destructor called
