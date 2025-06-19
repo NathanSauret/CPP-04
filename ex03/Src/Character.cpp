@@ -101,7 +101,7 @@ void	Character::unequip( int i )
 {
 	if (i >= 0 && i < 4 && this->_inventory[i])
 	{
-		std::cout << "\tCharacter" << this->_name << " equip Materia " << this->_inventory[i]->getType() << " at index " << i << std::endl;
+		std::cout << "\tCharacter" << this->_name << " unequip Materia " << this->_inventory[i]->getType() << " at index " << i << std::endl;
 		this->_inventory[i] = NULL;
 	}
 	else if (i < 0 || i >= 4)

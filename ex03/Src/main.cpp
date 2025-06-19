@@ -95,11 +95,14 @@ void	main_learn_materias(IMateriaSource* src)
 
 void	main_deep_copy()
 {
-	sub_title("Create Character 'dur0' named Alice");
-	Character *dur0 = new Character("Alice");
+	sub_title("Create Character 'dur0' named dur0");
+	Character *dur0 = new Character("dur0");
 
 	sub_title("'dur1' is a copy of dur0");
 	ICharacter *dur1 = new Character(*dur0);
+
+	sub_title("get 'dur1' name");
+	std::cout << "\tdur1->getName() = " << dur1->getName() << std::endl;
 
 	sub_title("delete 'dur0'");
 	delete dur0;
@@ -114,19 +117,19 @@ void	main_equip_materias(IMateriaSource* src, ICharacter *dur2)
 {
 	AMateria* tmp;
 
-	sub_title("Create Ice for 'tmp'");
+	sub_title("Create Ice for AMateria 'tmp'");
 	tmp = src->createMateria("ice");
-	sub_title("'tmp' equip the ice");
+	sub_title("'dur2' equip the ice");
 	dur2->equip(tmp);
 
-	sub_title("Create Cure for 'tmp'");
+	sub_title("Create Cure for AMateria 'tmp'");
 	tmp = src->createMateria("cure");
-	sub_title("'tmp' equip the cure");
+	sub_title("'dur2' equip the cure");
 	dur2->equip(tmp);
 
 	sub_title("Create 'hi' for 'tmp'");
 	tmp = src->createMateria("hi");
-	sub_title("'tmp' equip the 'hi'");
+	sub_title("'dur2' equip the 'hi'");
 	dur2->equip(tmp);
 }
 
@@ -164,27 +167,27 @@ void	main_max_equip(ICharacter *dur2)
 
 
 
-void	main_use_new_character(ICharacter *dur2)
+void	main_use_on_new_character(ICharacter *dur2)
 {
 	sub_title("Create Character 'bob'");
 	ICharacter* bob = new Character("Bob");
 
-	sub_title("'bob' use idx=0");
+	sub_title("'dur2' use idx=0 sur 'bob'");
 	dur2->use(0, *bob);
 
-	sub_title("'bob' use idx=1");
+	sub_title("'dur2' use idx=1 sur 'bob'");
 	dur2->use(1, *bob);
 
-	sub_title("'bob' use idx=2");
+	sub_title("'dur2' use idx=2 sur 'bob'");
 	dur2->use(2, *bob);
 	
-	sub_title("'bob' use idx=6");
+	sub_title("'dur2' use idx=6 sur 'bob'");
 	dur2->use(6, *bob);
 
-	sub_title("'bob' use idx=-4");
+	sub_title("'dur2' use idx=-4 sur 'bob'");
 	dur2->use(-4, *bob);
 
-	sub_title("'bob' use idx=3");
+	sub_title("'dur2' use idx=3 sur 'bob'");
 	dur2->use(3, *bob);
 
 	sub_title("delete 'bob'");
@@ -204,7 +207,8 @@ int main()
 	delete src;
 	std::cout << std::endl;
 
-	title("1. LEARN MATERIALS");
+	title("1. LEARN MATERIAS");
+	sub_title("Create Materia");
 	src = new MateriaSource();
 	main_learn_materias(src);
 	std::cout << std::endl;
@@ -213,9 +217,9 @@ int main()
 	main_deep_copy();
 	std::cout << std::endl;
 
-	title("3. EQUIP MATERIALS");
+	title("3. EQUIP MATERIAS");
 	sub_title("Create Character 'dur2'");
-	ICharacter *dur2 = new Character("Alice");
+	ICharacter *dur2 = new Character("dur2");
 	main_equip_materias(src, dur2);
 	sub_title("delete 'src'");
 	delete src;
@@ -225,8 +229,8 @@ int main()
 	main_max_equip(dur2);
 	std::cout << std::endl;
 
-	title("5. MATERIALS ON NEW CHARACTER");
-	main_use_new_character(dur2);
+	title("5. USE MATERIAS ON NEW CHARACTER");
+	main_use_on_new_character(dur2);
 	sub_title("delete 'dur2'");
 	delete dur2;
 	std::cout << std::endl;
